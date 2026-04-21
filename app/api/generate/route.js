@@ -9,7 +9,7 @@ ACCURACY RULES — strictly follow these:
 - For "Tip" posts: ground advice in established assessment principles (validity, reliability, washback, etc.).
 - Never invent statistics, quotes, or sources.
 
-Respond ONLY with valid JSON — no markdown, no backticks, no preamble.`;
+CRITICAL: Respond ONLY with a raw JSON object. No markdown. No backticks. No code fences. No explanation. Start your response with { and end with }. Nothing before or after.`;
 
 export async function POST(req) {
   try {
@@ -28,24 +28,28 @@ export async function POST(req) {
 
     const userPrompt = `Create a "${typeLabels[postType]}" social media post for ${platform} about: "${topic}".
 
-Return ONLY this JSON:
+Respond with ONLY this JSON object (no markdown, no backticks, start with {):
 {
   "headline": "Punchy headline, max 10 words. For quotes use actual quote in double curly braces e.g. {{quote text here}}",
   "body": "2-3 sentences, max 55 words. Accurate, engaging, educational. For quotes: include the real quote and attribute it clearly.",
-  "source": "Real source — author name + publication/institution + year. Leave empty string if not applicable for tips.",
-  "caption": "${platform} caption, 80-130 words. Hook opening, expand the point, end with a question or CTA for educators or institutions. Warm and professional tone.",
-  "hashtags": "8 relevant hashtags as a single space-separated string. Mix broad and niche tags relevant to language testing and education."
+  "source": "Real source — author name + publication/institution + year. Empty string for tips.",
+  "caption": "${platform} caption, 80-130 words. Hook opening, expand the point, end with a question or CTA for educators. Warm and professional tone.",
+  "hashtags": "8 relevant hashtags as a single space-separated string."
 }`;
 
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
           contents: [{ parts: [{ text: userPrompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1024,
+            responseMimeType: "application/json",
+          },
         }),
       }
     );
@@ -57,9 +61,22 @@ Return ONLY this JSON:
       return Response.json({ error: msg }, { status: 500 });
     }
 
-    const raw = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    const clean = raw.replace(/```json|```/g, "").trim();
-    const post = JSON.parse(clean);
+    const raw = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!raw) {
+      return Response.json({ error: "Empty response from Gemini. Please try again." }, { status: 500 });
+    }
+
+    // Strip any accidental markdown fences
+    const clean = raw.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim();
+
+    let post;
+    try {
+      post = JSON.parse(clean);
+    } catch (parseErr) {
+      console.error("Raw Gemini response:", raw);
+      return Response.json({ error: "Could not parse response. Please try again." }, { status: 500 });
+    }
 
     return Response.json({ post, typeLabel: typeLabels[postType] });
   } catch (err) {
