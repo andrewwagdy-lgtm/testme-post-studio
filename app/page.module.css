@@ -1,0 +1,333 @@
+.page {
+  min-height: 100vh;
+  background: #f0f3fa;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 36px 20px 60px;
+}
+
+.app {
+  background: white;
+  border-radius: 20px;
+  padding: 36px 36px 40px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+}
+
+/* Header */
+.header { margin-bottom: 32px; }
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.logoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  width: 38px;
+  height: 38px;
+}
+
+.lp {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
+.logoText { font-size: 22px; font-weight: 700; line-height: 1; }
+.logoTest { color: #1A3A8F; }
+.logoMe   { color: #C0392B; font-style: italic; }
+
+.studioLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+  letter-spacing: 0.04em;
+  border-left: 1.5px solid #ddd;
+  padding-left: 12px;
+  margin-left: 2px;
+}
+
+.subtitle { font-size: 13.5px; color: #888; line-height: 1.5; }
+
+/* Layout */
+.studio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Controls */
+.controls { display: flex; flex-direction: column; gap: 20px; }
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 9px;
+}
+
+.typeGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.typeBtn {
+  padding: 10px 8px;
+  border-radius: 8px;
+  border: 1px solid #dde0ee;
+  background: white;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  transition: all 0.15s;
+}
+.typeBtn:hover { background: #f3f4fb; }
+.typeBtnActive {
+  border-color: #6478B5;
+  background: #EEF0F8;
+  color: #3B4D8A;
+  font-weight: 500;
+}
+
+.platformRow { display: flex; gap: 8px; }
+.platBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dde0ee;
+  background: white;
+  font-size: 13px;
+  color: #666;
+  transition: all 0.15s;
+}
+.platBtn:hover { background: #f3f4fb; }
+.platBtnActive {
+  border-color: #C0392B;
+  background: #FDECEC;
+  color: #C0392B;
+  font-weight: 500;
+}
+
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dde0ee;
+  background: white;
+  font-size: 13px;
+  color: #333;
+  font-family: 'DM Sans', sans-serif;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+}
+
+.generateBtn {
+  width: 100%;
+  padding: 14px;
+  background: #3B4D8A;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.15s;
+  letter-spacing: 0.01em;
+}
+.generateBtn:hover { opacity: 0.88; }
+.generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.downloadBtn {
+  width: 100%;
+  padding: 12px;
+  background: #1A2353;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.downloadBtn:hover { opacity: 0.87; }
+.downloadBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.copyBtn {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  color: #666;
+  border: 1px solid #dde0ee;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: all 0.15s;
+}
+.copyBtn:hover { background: #f5f5f5; }
+
+.error {
+  background: #fff0f0;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 13px;
+  color: #c0392b;
+}
+
+/* Preview */
+.preview { display: flex; flex-direction: column; gap: 12px; }
+
+.canvasWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #6FA3E0;
+}
+
+.puzzleBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.logoArea {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.miniLogoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  width: 26px;
+  height: 26px;
+}
+.mlp {
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6px;
+}
+.miniLogoText { font-size: 11px; font-weight: 700; }
+
+.whiteCard {
+  position: absolute;
+  left: 10%;
+  top: 27%;
+  width: 80%;
+  height: 66%;
+  background: white;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.09);
+}
+
+.cardContent {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.tag {
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  color: #6478B5;
+  border: 1px solid #C5CBE8;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #EEF0F8;
+}
+
+.cardHeadline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1A2353;
+  line-height: 1.35;
+}
+
+.divider {
+  width: 50px;
+  height: 1px;
+  background: #E8EAF2;
+  flex-shrink: 0;
+}
+
+.cardBody { font-size: 10px; color: #555; line-height: 1.6; }
+.cardSource { font-size: 8.5px; color: #bbb; font-style: italic; }
+
+.emptyCard {
+  text-align: center;
+  color: #bbb;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.loadingCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #999;
+  font-size: 12px;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #E8EAF2;
+  border-top-color: #6478B5;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Caption */
+.captionWrap { display: flex; flex-direction: column; gap: 6px; }
+
+.captionBox {
+  background: #f7f8fc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: #555;
+  line-height: 1.65;
+  border: 1px solid #e8eaf2;
+  white-space: pre-wrap;
+}
+
+.hashtagBox {
+  font-size: 12px;
+  color: #6478B5;
+  line-height: 1.8;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  .app { padding: 22px 18px 32px; }
+  .studio { grid-template-columns: 1fr; }
+}

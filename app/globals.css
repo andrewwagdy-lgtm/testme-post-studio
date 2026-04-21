@@ -1,0 +1,10 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #f0f3fa;
+  min-height: 100vh;
+  color: #1a1a2e;
+}
+
+button { cursor: pointer; font-family: 'DM Sans', sans-serif; }
